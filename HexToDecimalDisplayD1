@@ -1,0 +1,30 @@
+module HexToDecimalDisplayD1 (
+    input [5:0] hex_input,      // 6-bit hexadecimal input
+    output reg [6:0] hex_display // 7-bit output for hexadecimal display
+);
+
+    reg [3:0] digit1
+
+    // Extracting digits from the hexadecimal input
+    always @* begin
+        digit1 = hex_input / 10; // First digit of the decimal number
+    end
+
+    // Assign seven-segment display outputs based on decimal digits
+    always @* begin
+        case(digit1)
+            0: hex_display = 7'b1000000; // Display pattern for digit 0
+            1: hex_display = 7'b1111001; // Display pattern for digit 1
+            2: hex_display = 7'b0100100; // Display pattern for digit 2
+            3: hex_display = 7'b0110000; // Display pattern for digit 3
+            4: hex_display = 7'b0011001; // Display pattern for digit 4
+            5: hex_display = 7'b0010010; // Display pattern for digit 5
+            6: hex_display = 7'b0000010; // Display pattern for digit 6
+            7: hex_display = 7'b1111000; // Display pattern for digit 7
+            8: hex_display = 7'b0000000; // Display pattern for digit 8
+            9: hex_display = 7'b0010000; // Display pattern for digit 9
+            default: hex_display = 7'b0000000; // Display nothing for other values
+        endcase
+    end
+
+endmodule
